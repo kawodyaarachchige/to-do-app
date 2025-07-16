@@ -1,0 +1,65 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ isEditMode ? 'Edit Todo' : 'Create Todo' }}</h5>
+      
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input 
+          type="text" 
+          class="form-control" 
+          id="title" 
+          formControlName="title"
+          [ngClass]="{ 'is-invalid': form.get('title')?.invalid && form.get('title')?.touched }"
+        >
+        <div *ngIf="form.get('title')?.invalid && form.get('title')?.touched" class="invalid-feedback">
+          <div *ngIf="form.get('title')?.hasError('required')">Title is required</div>
+          <div *ngIf="form.get('title')?.hasError('minlength')">Title must be at least 3 characters</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea 
+          class="form-control" 
+          id="description" 
+          formControlName="description"
+          rows="3"
+        ></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="dueDate" class="form-label">Due Date</label>
+        <input 
+          type="date" 
+          class="form-control" 
+          id="dueDate" 
+          formControlName="dueDate"
+          [ngClass]="{ 'is-invalid': form.get('dueDate')?.invalid && form.get('dueDate')?.touched }"
+        >
+        <div *ngIf="form.get('dueDate')?.invalid && form.get('dueDate')?.touched" class="invalid-feedback">
+          Due date is required
+        </div>
+      </div>
+
+      <div class="mb-3 form-check">
+        <input 
+          type="checkbox" 
+          class="form-check-input" 
+          id="completed" 
+          formControlName="completed"
+        >
+        <label class="form-check-label" for="completed">Completed</label>
+      </div>
+
+      <div class="d-flex justify-content-end gap-2">
+        <button type="button" class="btn btn-secondary" (click)="router.navigate(['/todo'])">
+          Cancel
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+          {{ isEditMode ? 'Update' : 'Create' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,29 @@
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: none;
+  
+  &-title {
+    color: #333;
+    font-weight: 600;
+  }
+}
+
+.btn-primary {
+  background-color: #6f42c1;
+  border: none;
+  padding: 10px;
+  font-weight: 500;
+  
+  &:hover {
+    background-color: darken(#631aeb, 5%);
+  }
+  
+  &:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+  }
+}
+
+.alert {
+  margin-top: 1rem;
+}

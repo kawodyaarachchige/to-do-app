@@ -1,0 +1,16 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h3>Welcome, {{ authService.currentUserValue?.name || 'User' }}!</h3>
+        </div>
+        <div class="card-body">
+          <p>You're successfully logged in.</p>
+          <p>Email: {{ authService.currentUserValue?.email }}</p>
+          <button class="btn btn-danger" (click)="authService.logout()">Logout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

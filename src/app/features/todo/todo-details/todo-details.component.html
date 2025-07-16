@@ -1,0 +1,38 @@
+<div class="container mt-4">
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && todo" class="card">
+    <div class="card-body">
+      <h5 class="card-title">
+        {{ todo.title }}
+        <span class="badge ms-2" [ngClass]="{
+          'bg-success': todo.completed,
+          'bg-warning': !todo.completed
+        }">
+          {{ todo.completed ? 'Completed' : 'Pending' }}
+        </span>
+      </h5>
+      <p class="card-text">{{ todo.description }}</p>
+      <p class="card-text">
+        <small class="text-muted">
+          Due: {{ todo.dueDate | formatDate:'fullDate' }}
+        </small>
+      </p>
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-primary" routerLink="/todo">
+          Back to List
+        </button>
+        <button class="btn btn-outline-secondary" [routerLink]="['/todo', todo.id, 'edit']">
+          Edit
+        </button>
+        <button class="btn btn-outline-danger" (click)="deleteTodo()">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

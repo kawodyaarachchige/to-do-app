@@ -1,0 +1,53 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Todo List</h2>
+    <button class="btn btn-purple" routerLink="/todo/new">Add New Todo</button>
+  </div>
+
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && todos.length === 0" class="alert alert-info">
+    No todos found. Create your first todo!
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3" *ngFor="let todo of todos">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">
+            <span [class.text-decoration-line-through]="todo.completed">
+              {{ todo.title }}
+            </span>
+            <span class="badge ms-2" [ngClass]="{
+              'bg-success': todo.completed,
+              'bg-warning': !todo.completed
+            }">
+              {{ todo.completed ? 'Completed' : 'Pending' }}
+            </span>
+          </h5>
+          <p class="card-text">{{ todo.description }}</p>
+          <p class="card-text">
+            <small class="text-muted">
+              Due: {{ todo.dueDate | formatDate }}
+            </small>
+          </p>
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-primary" [routerLink]="['/todo', todo.id]">
+              View
+            </button>
+            <button class="btn btn-sm btn-outline-secondary" [routerLink]="['/todo', todo.id, 'edit']">
+              Edit
+            </button>
+            <button class="btn btn-sm btn-outline-danger" (click)="deleteTodo(todo.id)">
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

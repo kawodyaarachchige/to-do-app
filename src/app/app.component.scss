@@ -1,0 +1,19 @@
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  .nav-link {
+    padding: 8px 15px;
+    font-weight: 500;
+    
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.container {
+  padding-bottom: 2rem;
+}
+.bg-purple {
+  background-color: #6f42c1 !important; /* Bootstrap’s purple color */
+}
