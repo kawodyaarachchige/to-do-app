@@ -1,10 +1,13 @@
 .card {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   border: none;
-  
+  border-radius: 1rem;
+  background-color: #fff;
+
   &-title {
     color: #333;
     font-weight: 600;
+    font-size: 1.5rem;
   }
 }
 
@@ -13,11 +16,12 @@
   border: none;
   padding: 10px;
   font-weight: 500;
-  
+  transition: background-color 0.3s ease;
+
   &:hover {
-    background-color: darken(#631aeb, 5%);
+    background-color: darken(#6f42c1, 7%);
   }
-  
+
   &:disabled {
     background-color: #6c757d;
     cursor: not-allowed;
@@ -26,4 +30,17 @@
 
 .alert {
   margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+input.form-control {
+  border-radius: 0.5rem;
+  padding: 0.65rem;
+  font-size: 0.95rem;
+}
+
+.form-label {
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+  color: #444;
 }

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+
+import { Router } from '@angular/router'; // Add this import
 import { AuthService } from './core/services/auth.service';
 
 @Component({
@@ -7,10 +9,14 @@ import { AuthService } from './core/services/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(public authService: AuthService) {}
+  constructor(
+    public authService: AuthService,
+    private router: Router // Inject Router here
+  ) {}
 
-  logout(event: Event): void {
+  logout(event: Event) {
     event.preventDefault();
     this.authService.logout();
+    this.router.navigate(['/auth/login']); // Now this will work
   }
 }

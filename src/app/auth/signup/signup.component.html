@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-6 col-lg-4">
-      <div class="card mt-5">
-        <div class="card-body">
+      <div class="card shadow-sm mt-5 rounded-4">
+        <div class="card-body p-4">
           <h2 class="card-title text-center mb-4">Sign Up</h2>
-          
+
           <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
             <div class="mb-3">
               <label for="name" class="form-label">Name</label>
@@ -19,7 +19,7 @@
                 Please provide your name.
               </div>
             </div>
-            
+
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
               <input 
@@ -33,7 +33,7 @@
                 Please provide a valid email.
               </div>
             </div>
-            
+
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
               <input 
@@ -41,28 +41,29 @@
                 class="form-control" 
                 id="password" 
                 formControlName="password"
+                appPasswordStrengthColor
                 [ngClass]="{ 'is-invalid': signupForm.get('password')?.invalid && signupForm.get('password')?.touched }"
               >
               <div class="invalid-feedback">
                 Password must be at least 6 characters.
               </div>
             </div>
-            
-            <div *ngIf="errorMessage" class="alert alert-danger">
+
+            <div *ngIf="errorMessage" class="alert alert-danger text-center">
               {{ errorMessage }}
             </div>
-            
-            <div *ngIf="successMessage" class="alert alert-success">
+
+            <div *ngIf="successMessage" class="alert alert-success text-center">
               {{ successMessage }}
             </div>
-            
+
             <button type="submit" class="btn btn-primary w-100" [disabled]="signupForm.invalid">
               Sign Up
             </button>
           </form>
-          
-          <div class="text-center mt-3">
-            <p>Already have an account? <a routerLink="/auth/login">Login</a></p>
+
+          <div class="text-center mt-3 small">
+            <p>Already have an account? <a routerLink="/auth/login" class="text-decoration-none">Login</a></p>
           </div>
         </div>
       </div>

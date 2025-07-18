@@ -43,7 +43,7 @@ export class AuthService {
     const users = this.getUsers();
     
     if (users.some(u => u.email === email)) {
-      return false; // Email already exists
+      return false; 
     }
     
     const newUser = { name, email, password };

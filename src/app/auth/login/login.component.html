@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-6 col-lg-4">
-      <div class="card mt-5">
-        <div class="card-body">
+      <div class="card shadow-sm mt-5 rounded-4">
+        <div class="card-body p-4">
           <h2 class="card-title text-center mb-4">Login</h2>
-          
+
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
@@ -19,7 +19,7 @@
                 Please provide a valid email.
               </div>
             </div>
-            
+
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
               <input 
@@ -33,18 +33,18 @@
                 Please provide a password.
               </div>
             </div>
-            
-            <div *ngIf="errorMessage" class="alert alert-danger">
+
+            <div *ngIf="errorMessage" class="alert alert-danger text-center">
               {{ errorMessage }}
             </div>
-            
+
             <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid">
               Login
             </button>
           </form>
-          
-          <div class="text-center mt-3">
-            <p>Don't have an account? <a routerLink="/auth/signup">Sign up</a></p>
+
+          <div class="text-center mt-3 small">
+            <p>Don't have an account? <a routerLink="/auth/signup" class="text-decoration-none">Sign up</a></p>
           </div>
         </div>
       </div>

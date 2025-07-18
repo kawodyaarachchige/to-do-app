@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ValidationErrorDirective } from './directives/validation-error.directive';
 import { FormatDatePipe } from './pipes/format-date.pipe';
+import { PasswordStrengthColorDirective } from './directives/password-strength-color.directive';
 
 @NgModule({
   declarations: [
-    ValidationErrorDirective,
-    FormatDatePipe
+    FormatDatePipe,
+    PasswordStrengthColorDirective
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    ValidationErrorDirective,
-    FormatDatePipe
+    FormatDatePipe,
+    PasswordStrengthColorDirective
   ]
 })
 export class SharedModule { }

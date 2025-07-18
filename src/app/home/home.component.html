@@ -1,15 +1,19 @@
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card">
-        <div class="card-header">
-          <h3>Welcome, {{ authService.currentUserValue?.name || 'User' }}!</h3>
-        </div>
-        <div class="card-body">
-          <p>You're successfully logged in.</p>
-          <p>Email: {{ authService.currentUserValue?.email }}</p>
-          <button class="btn btn-danger" (click)="authService.logout()">Logout</button>
-        </div>
+<div class="home-page">
+  <div class="welcome-card">
+    <div class="welcome-header">
+      <h2>Welcome, {{ authService.currentUserValue?.name || 'User' }}!</h2>
+    </div>
+    
+    <div class="welcome-body">
+      <p class="welcome-message">You're successfully logged in.</p>
+      
+      <div class="user-email">
+        <i class="bi bi-envelope-fill"></i>
+        {{ authService.currentUserValue?.email }}
+      </div>
+      
+      <div class="actions">
+        <a routerLink="/todo" class="btn btn-outline-purple">Go to Todos</a>
       </div>
     </div>
   </div>

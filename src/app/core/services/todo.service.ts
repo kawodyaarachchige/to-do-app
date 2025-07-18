@@ -24,7 +24,7 @@ export class TodoService {
 
   getTodos(): Observable<Todo[]> {
     const todos = this.getTodosFromStorage();
-    return of(todos).pipe(delay(500)); // Simulate API delay
+    return of(todos).pipe(delay(500)); 
   }
 
   getTodo(id: number): Observable<Todo> {
