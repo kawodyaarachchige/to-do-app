@@ -3,12 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoFormComponent } from './todo-form/todo-form.component';
 import { TodoDetailsComponent } from './todo-details/todo-details.component';
+import { UnsavedChangesGuard } from '../../core/guards/unsaved-changes.guard';
 
 const routes: Routes = [
   { path: '', component: TodoListComponent },
-  { path: 'new', component: TodoFormComponent },
+  { path: 'new', component: TodoFormComponent ,canDeactivate: [UnsavedChangesGuard]},
   { path: ':id', component: TodoDetailsComponent },
-  { path: ':id/edit', component: TodoFormComponent }
+  { path: ':id/edit', component: TodoFormComponent,canDeactivate: [UnsavedChangesGuard] }
 ];
 
 @NgModule({

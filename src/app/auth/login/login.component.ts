@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
   loginForm: FormGroup;
@@ -19,7 +19,7 @@ export class LoginComponent {
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
 
@@ -29,10 +29,20 @@ export class LoginComponent {
     }
 
     const { email, password } = this.loginForm.value;
-    if (this.authService.login(email, password)) {
-      this.router.navigate(['/']);
-    } else {
-      this.errorMessage = 'Invalid email or password';
-    }
+
+    this.authService.login(email, password).subscribe(
+      (success) => {
+        if (success) {
+          this.errorMessage = '';
+          this.router.navigate(['/']);
+        } else {
+          this.errorMessage = 'Invalid email or password';
+        }
+      },
+      (error) => {
+        this.errorMessage = 'Something went wrong. Please try again.';
+        console.error(error);
+      }
+    );
   }
 }

@@ -26,18 +26,28 @@ export class SignupComponent {
   }
 
   onSubmit(): void {
-    if (this.signupForm.invalid) {
-      return;
-    }
+  if (this.signupForm.invalid) {
+    return;
+  }
 
-    const { name, email, password } = this.signupForm.value;
-    if (this.authService.register(name, email, password)) {
+  const { name, email, password } = this.signupForm.value;
+
+  this.authService.register(name, email, password).subscribe(success => {
+    if (success) {
       this.successMessage = 'Registration successful! Redirecting...';
+      this.errorMessage = '';
+
       setTimeout(() => {
         this.router.navigate(['/']);
       }, 1500);
     } else {
       this.errorMessage = 'Email already exists';
+      this.successMessage = '';
     }
-  }
+  }, error => {
+    this.errorMessage = 'An error occurred during registration.';
+    console.error(error);
+  });
+}
+
 }

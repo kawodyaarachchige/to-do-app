@@ -1,9 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Todo } from '../../../core/models/todo.model';
+import { Todo } from '../../../core/models/todo';
 import { TodoService } from '../../../core/services/todo.service';
 import { debounceTime } from 'rxjs/operators';
+import { CanComponentDeactivate } from '../../../core/guards/unsaved-changes.guard';
+
+
 
 const FORM_STATE_KEY = 'todoFormState';
 
@@ -12,13 +15,15 @@ const FORM_STATE_KEY = 'todoFormState';
   templateUrl: './todo-form.component.html',
   styleUrls: ['./todo-form.component.scss']
 })
-export class TodoFormComponent implements OnInit, OnDestroy {
+export class TodoFormComponent implements OnInit, OnDestroy, CanComponentDeactivate {
   @Input() todo: Todo | null = null;
   @Output() submitted = new EventEmitter<Todo>();
 
   form: FormGroup;
   isEditMode = false;
   todoId: number | null = null;
+  formSubmitted = false;
+
 
   constructor(
     private fb: FormBuilder,
@@ -35,7 +40,7 @@ export class TodoFormComponent implements OnInit, OnDestroy {
 
     this.setupFormListeners();
   }
-
+ 
   ngOnInit(): void {
     const params = this.route.snapshot.params;
 
@@ -85,6 +90,8 @@ export class TodoFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
+    this.formSubmitted = true;
+
     if (this.form.invalid) return;
 
     const formValue = this.form.value;
@@ -93,7 +100,7 @@ export class TodoFormComponent implements OnInit, OnDestroy {
       dueDate: new Date(formValue.dueDate)
     };
 
-    localStorage.removeItem(FORM_STATE_KEY); // Clean up
+    localStorage.removeItem(FORM_STATE_KEY); 
 
     if (this.isEditMode && this.todoId) {
       this.todoService.updateTodo(this.todoId, todoData).subscribe({
@@ -121,4 +128,10 @@ export class TodoFormComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     localStorage.removeItem(FORM_STATE_KEY);
   }
+canDeactivate(): boolean {
+  if (this.form.dirty && !this.formSubmitted) {
+    return confirm('You have unsaved changes. Are you sure you want to leave?');
+  }
+  return true;
+}
 }
